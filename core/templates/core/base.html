@@ -1,0 +1,191 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %} 
+{% get_current_language as CURRENT_LANGUAGE %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}"
+>
+
+<head>
+  {% for header in headers %}
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{{header.title}}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  {%if header.icon%}
+  <link href="{{header.icon.url}}" rel="icon">
+  {% endif %}
+  {%if header.apple%}
+  <link href="{{header.apple.url}}" rel="apple-touch-icon">
+  {% endif %}
+  {% endfor %}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  {% get_current_language as LANGUAGE_CODE %}
+   <style>
+   body{
+     {%if LANGUAGE_CODE == 'ar' %}
+     text-align : right;
+  
+   {% else %} 
+   text-align : left;
+   {% endif %}
+   }
+</style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-198467392-1">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-198467392-1');
+  </script>
+</head>
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top  header-transparent ">
+    <div class="container d-flex align-items-center justify-content-between">
+      {% for header in headers %}
+      <div class="logo">
+        <a href="{% url 'home' %}" class="logo mr-auto">
+          {%if header.navlogo%}
+          <img src="{{header.navlogo.url}}" alt="" class="img-fluid">
+        {% endif %}</a>
+       
+      </div>
+      {% endfor %}
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">{%trans 'Home' %}</a></li>
+          <li><a class="nav-link scrollto" href="#features">{%trans 'Features' %}</a></li>
+          <li><a class="nav-link scrollto" href="#gallery">{%trans 'Gallery' %}</a></li>
+          <li><a class="nav-link scrollto" href="#about">{%trans 'About' %}</a></li>
+          <li><a class="nav-link scrollto" href="#whyus">{%trans 'Whyus' %}</a></li>
+          
+          {% get_current_language as CURRENT_LANGUAGE %}
+          {% get_available_languages as AVAILABLE_LANGUAGES %}
+          {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+          {% for language in languages %}
+              <li>
+                <a href="/{{ language.code }}/"
+                  {% if language.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
+                  {{ language.name_local }}
+                </a>
+              </li>
+           {% endfor %}
+           <li><a class="getstarted scrollto" href="#features">{%trans 'Get Started' %}</a></li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+ 
+  {% block content %}
+
+{% endblock %}
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    {% for header in headers %}
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+          
+            <div class="logo">
+              <a href="{% url 'home' %}" class="logo mr-auto">
+                {%if header.footer_img %}
+                <img src="{{header.footer_img.url}}" alt="" class="img-fluid"></a>
+             {%endif%}
+            </div>
+         
+            <strong>{%trans 'Phone' %} :</strong>{{header.phone}}<br>
+            <strong>{%trans 'Email' %} :</strong> {{header.email}}<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>{%trans 'Useful Links'%}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">{%trans 'Home' %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#features">{%trans 'Features' %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#gallery">{%trans 'Gallery' %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">{%trans 'About' %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#whyus">{%trans 'Whyus' %}</a></li>
+            </ul>
+          </div>
+
+
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <div class="social-links mt-3">
+              <a href="{{header.twitter_url}}" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="{{header.facebook_url}}" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="{{header.instagram_url}}" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="{{header.tiktok_url}}" class="tiktok"><i class="bx bxl-tiktok"></i></a>
+              <a href="{{header.linkedin_url}}" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="container py-4">
+      <div class="copyright">
+        &copy;{%trans 'Copyright'%}  <strong><span>{%trans 'Amtyaz'%} 2023</span></strong>{%trans 'All Rights Reserved'%} 
+      </div>
+      <div class="credits"> <strong>{%trans 'Designed by' %}</strong>{%trans 'webcode'%}</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  
+
+
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

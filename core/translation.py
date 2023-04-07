@@ -1,8 +1,8 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Header , About , Whyus ,Service , Cts , Team ,Client , Project
+from .models import Header , Client_intro,About,Gallery_intro , Whyus ,Feature ,Feature_intro,Client,Contact_intro
 
 class HeaderTranslationOptions(TranslationOptions):
-    fields = ('title', 'slider_text_1','slider_text_2','slider_text_3','slider_header_1','slider_header_2','slider_header_3','footer_address1','footer_address2',)
+    fields = ('title', 'slider_text','slider_header','footer_address1','footer_address2')
 
 translator.register(Header, HeaderTranslationOptions)
 
@@ -10,33 +10,35 @@ class AboutTranslationOptions(TranslationOptions):
     fields = ('header', 'body',)
 
 translator.register(About, AboutTranslationOptions)
+class Gallery_introTranslationOptions(TranslationOptions):
+    fields = ('header', 'body',)
+
+translator.register(Gallery_intro, Gallery_introTranslationOptions)
+class Client_introTranslationOptions(TranslationOptions):
+    fields = ('header', 'body',)
+
+translator.register(Client_intro, Client_introTranslationOptions)
 
 class WhyusTranslationOptions(TranslationOptions):
-    fields = ('title', 'text',)
+    fields = ('title', 'body',)
 
 translator.register(Whyus, WhyusTranslationOptions)
 
-class ServiceTranslationOptions(TranslationOptions):
-    fields = ('title', 'intro','text',)
+class FeatureTranslationOptions(TranslationOptions):
+    fields = ('feature_name','feature',)
 
-translator.register(Service, ServiceTranslationOptions)
+translator.register(Feature, FeatureTranslationOptions)
 
-class CtsTranslationOptions(TranslationOptions):
-    fields = ('title', 'text',)
+class Feature_introTranslationOptions(TranslationOptions):
+    fields = ('title','intro',)
 
-translator.register(Cts, CtsTranslationOptions)
-class TeamTranslationOptions(TranslationOptions):
-    fields = ('title', 'about_team','name','position',)
-
-translator.register(Team, TeamTranslationOptions)
-
-
+translator.register(Feature_intro, Feature_introTranslationOptions)
 
 class ClientTranslationOptions(TranslationOptions):
     fields = ('client_name','review_message',)
 
 translator.register(Client, ClientTranslationOptions)
-class ProjectTranslationOptions(TranslationOptions):
-    fields = ('project_name','project_details',)
+class Contact_introTranslationOptions(TranslationOptions):
+    fields = ('header', 'body',)
 
-translator.register(Project, ProjectTranslationOptions)
+translator.register(Contact_intro, Contact_introTranslationOptions)

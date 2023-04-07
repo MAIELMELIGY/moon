@@ -1,0 +1,213 @@
+{%  extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+  
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    {% for header in headers %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+          <div>
+            <h1>{{header.slider_header}}</h1>
+            <h2>{{header.slider_text|safe}}</h2>
+          </div>
+        </div>
+        <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+          {%if header.slider_img %}
+          <img src="{{header.slider_img.url}}" class="img-fluid" alt="">
+          {%endif%}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= App Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+      {%for i in feature_intro%}
+        <div class="section-title">
+          <h2 style="color:black">{{i.title}}</h2>
+          <p style="color:black">{{i.intro}}</p>
+        </div>
+        {%endfor%}
+        <div class="row no-gutters">
+          <div class="col-xl-7 d-flex align-items-stretch order-2 order-lg-1">
+            <div class="content d-flex flex-column justify-content-center">
+              <div class="row">
+                {%for i in features %}
+                <div class="col-md-6 icon-box" data-aos="fade-up">
+                  <i class="{{i.feature_icon}}"></i>
+                  <h4 style="color:black">{{i.feature_name}}</h4>
+                  <p style="color:black">{{i.feature|safe}}</p>
+                </div>
+          {%endfor%}
+              </div>
+            </div>
+          </div>
+          {%for i in feature_intro%}
+          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            {%if i.feature_image%}
+
+            <img src="{{i.feature_image.url}}" class="img-fluid" alt="">
+            {%endif%}
+          </div>
+        </div>
+{%endfor%}
+      </div>
+    </section><!-- End App Features Section -->
+
+    <!-- ======= Details Section ======= -->
+    <section id="details" class="details">
+      <div class="container">
+      {%for i in abouts%}
+        <div class="row content" id='about'>
+          <div class="col-md-4" data-aos="fade-right">
+            {%if i.about_image%}
+            <img src="{{i.about_image.url}}" class="img-fluid" alt="">
+            {%endif%}
+          </div>
+          <div class="col-md-8 pt-4" data-aos="fade-up">
+           
+            <h3>{{i.header}}</h3>
+            <p class="fst-italic" style="color:black">
+            {{i.body|safe}}
+            </p>
+          </div>
+        </div>
+      {%endfor %}
+        {%for i in whyus%}
+        <div class="row content"id='whyus'>
+          <div class="col-md-4 order-1 order-md-2" data-aos="fade-left">
+            {%if i.img%}
+
+            <img src="{{i.img.url}}" class="img-fluid" alt="">
+            {%endif%}
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+            <h3>{{i.title}}</h3>
+            <p class="fst-italic" style="color:black">
+           {{i.body|safe}}
+            </p>
+          </div>
+        </div>
+        {%endfor %}
+    
+      </div>
+    </section><!-- End Details Section -->
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container" data-aos="fade-up">
+       {% for i in gallery_intro %}
+        <div class="section-title">
+          <h2>{{i.header}}</h2>
+          <p style="color:black">{{i.body|safe}}</p>
+        </div>
+        {%endfor %}
+      </div>
+      <div class="container-fluid" data-aos="fade-up">
+        <div class="gallery-slider swiper">
+          <div class="swiper-wrapper">
+            {% for i in gallery%}
+            {%if i.img%}
+            <div class="swiper-slide"><a href="{{i.img.url}}" class="gallery-lightbox" data-gall="gallery-carousel"><img src="{{i.img.url}}" class="img-fluid" alt=""></a></div>
+            {%endif%}
+            {%endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+      <div class="container" data-aos="fade-up">
+        {%for i in client_intro%}
+        <div class="section-title">
+          <h2>{{i.header}}</h2>
+          <p style="color:black">{{i.body|safe}}</p>
+        </div>
+          {%endfor%}
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+        {%for i in clients%}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                {%if i.img%}
+                <img src="{{i.img.url}}" class="testimonial-img" alt="">
+                {%endif%}
+                <h3>{{i.client_name}}</h3>
+              
+                <p style="color:black">
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                 {{i.review_message|safe}}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+                  {%endfor%}
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          {%for i in contact_intro%}
+          <h2>{{i.header}}</h2>
+          <p style="color:black">
+            {{i.body}}
+          </p>
+        </div>
+         {%endfor%}
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="row">
+              {%for i in headers%}
+              <div class="col-lg-3 info">
+                <i class="bx bx-map"></i>
+                <h4>{%trans 'Address'%}</h4>
+                <p style="color:black">{{i.footer_address1}}<br>{{i.footer_address2}}</p>
+              </div>
+              <div class="col-lg-3 info">
+                <i class="bx bx-phone"></i>
+                <h4>{%trans 'Call Us'%}</h4>
+                <p>{{i.phone}}</p>
+              </div>
+              <div class="col-lg-3 info">
+                <i class="bx bx-envelope"></i>
+                <h4>{%trans 'Email'%}</h4>
+                <p>{{i.email}}</p>
+              </div>
+
+              <div class="col-lg-3 info">
+                <i class="bx bx-time-five"></i>
+                <h4>{%trans 'Working Hours'%}</h4>
+                <p>{{i.working_hours}}</p>
+              </div>
+             {%endfor%}
+            </div>
+          </div>
+
+ 
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+  {% endblock %}
